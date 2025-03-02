@@ -6,7 +6,7 @@
 #include <vector>
 using namespace std;
 
-class User
+class User //å®¢æˆ·ç±»
 {
     public:
     string username;
@@ -17,55 +17,55 @@ class User
     : username(uname), password(pwd){}
 };
 
-class Hotel
+class Hotel //é…’åº—ç±»ï¼Œç®¡ç†æˆ¿é—´çŠ¶æ€
 {
     private:
     vector<bool> rooms;
 
     public:
-    // ÏÔÊ¾·¿¼ä×´Ì¬
+    // æ˜¾ç¤ºæˆ¿é—´çŠ¶æ€
     Hotel(int numRooms):rooms(numRooms,false){}
 
     void displayRooms()const
     {
-        cout<<"·¿¼ä×´Ì¬"<<endl;
+        cout<<"æˆ¿é—´çŠ¶æ€"<<endl;
         for(int i=0;i<rooms.size();i++)
         {
-            cout<<"·¿¼ä"<<i+1<<":"<<(rooms[i]?"ÒÑÔ¤¶¨":"¿ÕÏĞ")<<endl;
+            cout<<"æˆ¿é—´"<<i+1<<":"<<(rooms[i]?"å·²é¢„å®š":"ç©ºé—²")<<endl;
         }
     }
-    //Ô¤¶©·¿¼ä 
+    //é¢„è®¢æˆ¿é—´ 
     bool bookRoom(int roomNumber)
     {
         if (roomNumber < 1 || roomNumber > rooms.size()) {
-            std::cout << "ÎŞĞ§µÄ·¿¼äºÅ¡£\n";
+            std::cout << "æ— æ•ˆçš„æˆ¿é—´å·ã€‚\n";
             return false;
         }
         if (rooms[roomNumber - 1]) {
-            std::cout << "·¿¼ä " << roomNumber << " ÒÑ±»Ô¤¶©¡£\n";
+            std::cout << "æˆ¿é—´ " << roomNumber << " å·²è¢«é¢„è®¢ã€‚\n";
             return false;
         }
         rooms[roomNumber - 1] = true;
-        std::cout << "·¿¼ä " << roomNumber << " Ô¤¶©³É¹¦¡£\n";
+        std::cout << "æˆ¿é—´ " << roomNumber << " é¢„è®¢æˆåŠŸã€‚\n";
         return true;
     }
-    //ÍË·¿
+    //é€€æˆ¿
     bool checkoutRoom(int roomNumber)
     {
         if (roomNumber < 1 || roomNumber > rooms.size()) {
-            std::cout << "ÎŞĞ§µÄ·¿¼äºÅ¡£\n";
+            std::cout << "æ— æ•ˆçš„æˆ¿é—´å·ã€‚\n";
             return false;
         }
         if (!rooms[roomNumber - 1]) {
-            std::cout << "·¿¼ä " << roomNumber << " ÒÑ¾­ÊÇ¿ÕÏĞ×´Ì¬¡£\n";
+            std::cout << "æˆ¿é—´ " << roomNumber << " å·²ç»æ˜¯ç©ºé—²çŠ¶æ€ã€‚\n";
             return false;
         }
         rooms[roomNumber - 1] = false;
-        std::cout << "·¿¼ä " << roomNumber << " ÍË·¿³É¹¦¡£\n";
+        std::cout << "æˆ¿é—´ " << roomNumber << " é€€æˆ¿æˆåŠŸã€‚\n";
         return true;
     }
 
-    //±£´æ·¿¼ä×´Ì¬µ½ÎÄ¼ş
+    //ä¿å­˜æˆ¿é—´çŠ¶æ€åˆ°æ–‡ä»¶
     void saveState(const string& filename) const
     {
         ofstream file(filename);
@@ -77,7 +77,7 @@ class Hotel
     }
 
 
-    //´ÓÎÄ¼ş¼ÓÔØ·¿¼ä×´Ì¬
+    //ä»æ–‡ä»¶åŠ è½½æˆ¿é—´çŠ¶æ€
     void loadState(const string& filename)
     {
         ifstream file(filename);
@@ -94,7 +94,7 @@ class Hotel
     }
 };
 
-//ÓÃ»§¹ÜÀí£¬×¢²á£¬µÇÂ½
+//ç”¨æˆ·ç®¡ç†ï¼Œæ³¨å†Œï¼Œç™»é™†
 class UserManager
 {
 private:
@@ -102,38 +102,38 @@ private:
     string currentUser;
 
 public:
-// ×¢²áĞÂÓÃ»§
+// æ³¨å†Œæ–°ç”¨æˆ·
     bool regisUser(const string& username,const string& password)
     {
         if(users.find(username)!=users.end())
         {
-            cout<<"ÓÃ»§ÒÑ´æÔÚ"<<endl;
+            cout<<"ç”¨æˆ·å·²å­˜åœ¨"<<endl;
             return false;
         }
         users[username]=User(username,password);
-        cout<<"×¢²á³É¹¦"<<endl;
+        cout<<"æ³¨å†ŒæˆåŠŸ"<<endl;
         return true;
     }
 
-// ÓÃ»§µÇÂ½
+// ç”¨æˆ·ç™»é™†
     bool login(const string& username,const string& password)
     {
         if(users.find(username)==users.end()||users[username].password!=password)
         {
-                cout<<"ÓÃ»§Ãû»òÃÜÂë´íÎó"<<endl;
+                cout<<"ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯"<<endl;
                 return false;
         }
         currentUser=username;
-        cout<<"µÇÂ½³É¹¦"<<username<<endl;
+        cout<<"ç™»é™†æˆåŠŸ"<<username<<endl;
         return true;
     }
    
-    //ÓÃ»§ÊÇ·ñµÇÂ½
+    //ç”¨æˆ·æ˜¯å¦ç™»é™†
     bool isLogin() const
     {
         return !currentUser.empty();
     }
-    //±£´æÓÃ»§Êı¾İ
+    //ä¿å­˜ç”¨æˆ·æ•°æ®
     void saveUsers(const string& filename)const
     {
         ofstream file(filename);
@@ -144,7 +144,7 @@ public:
         file.close();
     }
 
-    //´ÓÎÄ¼şÖĞ¼ÓÔØÓÃ»§Êı¾İ
+    //ä»æ–‡ä»¶ä¸­åŠ è½½ç”¨æˆ·æ•°æ®
     void loadUsers(const string& filename)
     {
         std::ifstream file(filename);
@@ -159,6 +159,7 @@ public:
     }
 };
 
+//Logo
 void printLogo()
 {
     cout<<"+--------------------------+"<<endl;
@@ -175,7 +176,7 @@ int main()
     Hotel hotel(roomNum);
     UserManager userManager;
 
-    //¼ÓÔØÓÃ»§ºÍ·¿¼äĞÅÏ¢
+    //åŠ è½½ç”¨æˆ·å’Œæˆ¿é—´ä¿¡æ¯
     userManager.loadUsers(userFile);
     hotel.loadState(roomFile);
     printLogo();
@@ -183,27 +184,27 @@ int main()
     {
         if(!userManager.isLogin())
         {
-            cout << "1. µÇÂ¼\n";
-            cout << "2. ×¢²á\n";
-            cout << "3. ÍË³ö\n";
-            cout << "ÇëÑ¡Ôñ²Ù×÷: ";
+            cout << "1. ç™»å½•\n";
+            cout << "2. æ³¨å†Œ\n";
+            cout << "3. é€€å‡º\n";
+            cout << "è¯·é€‰æ‹©æ“ä½œ: ";
             int choice;
             cin>>choice;
             if(choice==1)
             {
                 string username,password;
-                cout<<"ÇëÊäÈëÓÃ»§Ãû"<<endl;
+                cout<<"è¯·è¾“å…¥ç”¨æˆ·å"<<endl;
                 cin>>username;
-                cout<<"ÇëÊäÈëÃÜÂë"<<endl;
+                cout<<"è¯·è¾“å…¥å¯†ç "<<endl;
                 cin>>password;
                 userManager.login(username,password);
             }
             else if(choice==2)
             {
                 string username,password;
-                cout<<"ÇëÊäÈëÓÃ»§Ãû"<<endl;
+                cout<<"è¯·è¾“å…¥ç”¨æˆ·å"<<endl;
                 cin>>username;
-                cout<<"ÇëÊäÈëÃÜÂë"<<endl;
+                cout<<"è¯·è¾“å…¥å¯†ç "<<endl;
                 cin>>password;
                 userManager.regisUser(username,password);
             }
@@ -212,16 +213,16 @@ int main()
                 break;
             }
             else{
-                cout<<"ÇëÖØĞÂÑ¡Ôñ"<<endl;
+                cout<<"è¯·é‡æ–°é€‰æ‹©"<<endl;
             }
         }
         else{
-            cout<<"¾ÆµêÈë×¡¹ÜÀíÏµÍ³"<<endl;
-            cout << "1. ²é¿´ËùÓĞ·¿¼ä×´Ì¬\n";
-            cout << "2. Ô¤¶©·¿¼ä\n";
-            cout << "3. ÍË·¿\n";
-            cout << "4. ÍË³ö\n";
-            cout << "ÇëÑ¡Ôñ²Ù×÷: ";
+            cout<<"é…’åº—å…¥ä½ç®¡ç†ç³»ç»Ÿ"<<endl;
+            cout << "1. æŸ¥çœ‹æ‰€æœ‰æˆ¿é—´çŠ¶æ€\n";
+            cout << "2. é¢„è®¢æˆ¿é—´\n";
+            cout << "3. é€€æˆ¿\n";
+            cout << "4. é€€å‡º\n";
+            cout << "è¯·é€‰æ‹©æ“ä½œ: ";
 
             int choice;
             std::cin >> choice;
@@ -232,26 +233,26 @@ int main()
                     break;
                 case 2: {
                     int roomNumber;
-                    cout << "ÇëÊäÈëÒªÔ¤¶©µÄ·¿¼äºÅ: ";
+                    cout << "è¯·è¾“å…¥è¦é¢„è®¢çš„æˆ¿é—´å·: ";
                     cin >> roomNumber;
                     hotel.bookRoom(roomNumber);
                     break;
                 }
                 case 3: {
                     int roomNumber;
-                    std::cout << "ÇëÊäÈëÒªÍË·¿µÄ·¿¼äºÅ: ";
+                    std::cout << "è¯·è¾“å…¥è¦é€€æˆ¿çš„æˆ¿é—´å·: ";
                     std::cin >> roomNumber;
                     hotel.checkoutRoom(roomNumber);
                     break;
                 }
                 case 4:
-                    // ±£´æÊı¾İ²¢ÍË³ö
+                    // ä¿å­˜æ•°æ®å¹¶é€€å‡º
                     userManager.saveUsers(userFile);
                     hotel.saveState(roomFile);
-                    std::cout << "ÍË³öÏµÍ³¡£\n";
+                    std::cout << "é€€å‡ºç³»ç»Ÿã€‚\n";
                     return 0;
                     default:
-                    std::cout << "ÎŞĞ§µÄÑ¡Ôñ£¬ÇëÖØĞÂÊäÈë¡£\n";
+                    std::cout << "æ— æ•ˆçš„é€‰æ‹©ï¼Œè¯·é‡æ–°è¾“å…¥ã€‚\n";
             }
         }
     }
